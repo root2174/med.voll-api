@@ -6,17 +6,19 @@ import com.example.api.domain.medicos.models.Medico;
 import com.example.api.domain.medicos.repositories.MedicosRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/medicos")
 public class MedicosController {
+    private final MedicosRepository repository;
 
-   @Autowired
-    private MedicosRepository repository;
+   public MedicosController(MedicosRepository repository) {
+       this.repository = repository;
+   }
 
     @PostMapping
     @Transactional
@@ -25,7 +27,8 @@ public class MedicosController {
     }
 
     @GetMapping
-    public List<DadosListagemMedico> listar(){
-       return repository.findAll().stream().map(DadosListagemMedico::new).toList();
+    public Page<DadosListagemMedico> listar(
+            @PageableDefault(size = 8, sort = {"nome"}) Pageable paginacao){
+       return repository.findAll(paginacao).map(DadosListagemMedico::new);
     }
 }

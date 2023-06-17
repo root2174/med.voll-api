@@ -3,3 +3,8 @@ spring:
     url: jdbc:mysql://localhost:3306/voll_med_api
     username: user
     password: password
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
