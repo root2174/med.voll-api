@@ -13,6 +13,9 @@ public record DadosCadastroMedico(
         @Email
         String email,
 
+        @NotBlank
+        String telefone,
+
         @NotNull
         @Pattern(regexp = "\\d{4,6}")
         String crm,
