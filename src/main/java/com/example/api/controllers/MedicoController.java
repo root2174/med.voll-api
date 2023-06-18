@@ -71,7 +71,7 @@ public class MedicoController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoMedico> detalhar(
             @PathVariable Long id
     ) {
