@@ -1,6 +1,7 @@
 package com.example.api.domain.medicos.models;
 
 import com.example.api.domain.endereco.models.Endereco;
+import com.example.api.domain.medicos.dto.DadosAtualizarMedico;
 import com.example.api.domain.medicos.dto.DadosCadastroMedico;
 import com.example.api.domain.medicos.enums.Especialidade;
 import jakarta.persistence.*;
@@ -26,6 +27,8 @@ public class Medico {
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
 
+    private boolean ativo;
+
     @Embedded
     private Endereco endereco;
 
@@ -36,5 +39,24 @@ public class Medico {
         this.crm = dados.crm();
         this.endereco = new Endereco(dados.endereco());
         this.especialidade = dados.especialidade();
+        this.ativo = true;
+    }
+
+    public void atualizarInformacoes(DadosAtualizarMedico dados) {
+        if (dados.nome() != null) {
+            this.nome = dados.nome();
+        }
+
+        if (dados.telefone() != null) {
+            this.telefone = dados.telefone();
+        }
+
+        if (dados.endereco() != null) {
+            this.endereco.atualizarInformacoes(dados.endereco());
+        }
+    }
+
+    public void excluir() {
+        this.ativo = false;
     }
 }
