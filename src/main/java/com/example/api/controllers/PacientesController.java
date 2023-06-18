@@ -46,7 +46,9 @@ public class PacientesController {
     @GetMapping
     public ResponseEntity<Page<DadosListagemPaciente>> listar(
             @PageableDefault(size = 8, sort = {"nome"})Pageable paginacao) {
-        var page = repository.findAllByAtivoTrue(paginacao).map(DadosListagemPaciente::new);
+        var page = repository
+                .findAllByAtivoTrue(paginacao)
+                .map(DadosListagemPaciente::new);
         return ResponseEntity.ok(page);
     }
 
@@ -60,7 +62,8 @@ public class PacientesController {
 
     @PutMapping
     @Transactional
-    public ResponseEntity<ResponseStatus> atualizar(@RequestBody @Valid DadosAtualizacaoPaciente dados) {
+    public ResponseEntity<ResponseStatus> atualizar(
+            @RequestBody @Valid DadosAtualizacaoPaciente dados) {
         var paciente = repository.getReferenceById(dados.id());
         paciente.atualizarInformacoes(dados);
 
