@@ -30,6 +30,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         if (tokenJWT == null) {
             filterChain.doFilter(request, response);
+            return;
         }
 
         var subject = tokenService.getSubject(tokenJWT);
