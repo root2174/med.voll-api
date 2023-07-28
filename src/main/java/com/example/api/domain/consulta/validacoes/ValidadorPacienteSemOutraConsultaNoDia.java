@@ -3,9 +3,11 @@ package com.example.api.domain.consulta.validacoes;
 import com.example.api.domain.consulta.ConsultaRepository;
 import com.example.api.domain.consulta.DadosAgendamentoConsulta;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
 @RequiredArgsConstructor
-public class ValidadorPacienteSemOutraConsultaNoDia {
+public class ValidadorPacienteSemOutraConsultaNoDia implements ValidadorAgendamentoDeConsulta {
 
     private final ConsultaRepository consultaRepository;
 

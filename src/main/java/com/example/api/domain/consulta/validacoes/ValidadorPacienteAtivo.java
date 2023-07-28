@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class ValidadorPacienteAtivo {
+public class ValidadorPacienteAtivo implements ValidadorAgendamentoDeConsulta {
 
     private final PacienteRepository pacienteRepository;
 
