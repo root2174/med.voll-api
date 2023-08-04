@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/voll_med_api_test
+    username: user
+    password: password
