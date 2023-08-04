@@ -18,7 +18,7 @@ public class ConsultaService {
     private final PacienteRepository pacienteRepository;
     private final Set<ValidadorAgendamentoDeConsulta> validadores;
 
-    public void agendar(DadosAgendamentoConsulta dados) {
+    public DadosDetalhamentoConsulta agendar(DadosAgendamentoConsulta dados) {
 
         validadores.forEach(v -> v.validar(dados));
 
@@ -30,6 +30,8 @@ public class ConsultaService {
 
         var consulta = new Consulta(null, medico, paciente, dados.data());
         consultaRepository.save(consulta);
+
+        return new DadosDetalhamentoConsulta(consulta);
     }
 
     private Medico escolherMedico(DadosAgendamentoConsulta dados) {
